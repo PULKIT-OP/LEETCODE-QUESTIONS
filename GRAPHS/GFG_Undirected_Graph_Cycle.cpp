@@ -1,5 +1,7 @@
 // Question Link: https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1
 
+// METHOD 1: USING DFS
+
 class Solution {
     bool isCycleDFS(int u, vector<vector<int>> &adj, vector<bool> &visited, int parent){
         visited[u] = true;
@@ -36,6 +38,55 @@ class Solution {
       //
         for(int i = 0; i < V; i++){
             if(!visited[i] && isCycleDFS(i, adj, visited, -1)){
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
+
+// METHOD 2: USING BFS ----> Doing the same thing just using the typical BFS algorithm.
+
+class Solution {
+    bool isCycleBFS(int u, vector<vector<int>> &adj, vector<bool> &visited, int parent){
+        visited[u] = true;
+        
+        queue<int> que;
+        que.push(u);
+        
+        while(!que.empty()){
+            int node = que.front();
+            que.pop();
+            
+            for(auto &v : adj[node]){
+                if(v == parent){
+                    continue;
+                }
+                if(visited[v]){
+                    return true;
+                }
+                if(isCycleBFS(v, adj, visited, node)){
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+  public:
+    bool isCycle(int V, vector<vector<int>>& edges) {
+        // Code here
+        vector<vector<int>> adj(V);
+        vector<bool> visited(V, false);
+        
+        for(int i = 0; i < edges.size(); i++){
+            adj[edges[i][0]].push_back(edges[i][1]);
+            adj[edges[i][1]].push_back(edges[i][0]);
+        }
+        
+        for(int i = 0; i < V; i++){
+            if(!visited[i] && isCycleBFS(i, adj, visited, -1)){
                 return true;
             }
         }
