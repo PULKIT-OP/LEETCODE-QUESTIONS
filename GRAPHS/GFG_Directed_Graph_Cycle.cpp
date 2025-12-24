@@ -94,3 +94,58 @@ class Solution {
     	return false;
     }
 };
+
+
+// METHOD 3: USING BFS (KAHN's ALGORITHM)
+
+class Solution {
+  public:
+  
+    bool isCyclic(int V, vector<vector<int>> &edges) {
+        // code here
+      vector<vector<int>> adj(V);
+    	for(auto &vec : edges){
+    		int u = vec[0];
+    		int v = vec[1];
+    
+    		adj[u].push_back(v);
+    	}
+    	
+    	queue<int> que;
+    	vector<int> indeg(V, 0);
+    	int count = 0;
+    
+    	for(auto &v : adj){
+    	    for(int i = 0; i < v.size(); i++){
+    	        indeg[v[i]]++;
+    	    }
+    	}
+    	
+    	for(int i = 0; i < V; i++){
+    	    if(indeg[i] == 0){
+    	        que.push(i);
+    	    }
+    	}
+    	
+    	while(!que.empty()){
+    	    int node = que.front();
+    	    que.pop();
+    	    count++;    // Instead of adding topological order we will just count how many nodes are in ans.
+    	    
+    	    for(auto &v : adj[node]){
+    	        indeg[v]--;
+    	        
+    	        if(indeg[v] == 0){
+    	            que.push(v);
+    	        }
+    	    }
+    	}
+
+      // if the number of nodes in topological order == Number of vertices(V) means topological order worked and this is acyclic graph because topological sort will work ONLY on acyclic graph
+    	if(count != V){
+    	    return true;
+    	}
+    	
+    	return false;
+    }
+};
