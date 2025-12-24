@@ -57,4 +57,45 @@ public:
 };
 
 
-// METHOD 2: TOPOLOGICAL SORT USING DFS
+// METHOD 2: USING DFS    ---> Here we used algorithm which is used to find cycle in directed graph, same logic works here aswell is cycle ---> false, if acyclic ---> true.
+
+class Solution {
+public:
+    bool DFS(int u, vector<vector<int>> &adj, vector<bool> &visited, vector<bool> &inRecursion){
+        visited[u] = true;
+        inRecursion[u] = true;
+
+        for(auto &v : adj[u]){
+            if(!visited[v] && DFS(v, adj, visited, inRecursion)){
+                return true;
+            }
+            if(visited[v] && inRecursion[v]){
+                return true;
+            }
+        }
+        inRecursion[u] = false;
+        return false;
+    }
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        int n = prerequisites.size();
+        vector<vector<int>> adj(numCourses);
+        for(int i = 0; i < n; i++){
+            int u = prerequisites[i][1];
+            int v = prerequisites[i][0];
+
+            adj[u].push_back(v);
+        }
+        
+        vector<bool> visited(numCourses, false);
+        vector<bool> inRecursion(numCourses, false);
+        int count = 0;
+
+        for(int i = 0; i < numCourses; i++){
+            if(!visited[i] && DFS(i, adj, visited, inRecursion)){
+                return false;
+            }
+        }
+        return true;
+
+    }
+};
