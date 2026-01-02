@@ -132,3 +132,29 @@ class Solution {
         return sum;
     }
 };
+
+
+/*
+Which Algo is better Prim's or Kruskal's ??
+
+Actually, they both have their strengths and weaknesses, and which one is "better" depends on the specific characteristics of the graph and the requirements of the problem. Here are some key points to consider:
+
+
+1. Prim's Algorithm:
+   - Prim's algorithm starts with a single vertex and grows the MST one vertex at a time.
+   - It is often more efficient when the graph is dense (i.e., it has many edges relative to the number of vertices).
+   - It typically has a lower time complexity on dense graphs, usually O(V^2) or O(V^2 + E), where V is the number of vertices and E is the number of edges.
+
+2. Kruskal's Algorithm:
+   - Kruskal's algorithm considers all edges in the graph and sorts them by weight, then adds edges to the MST in increasing order of weight while avoiding cycles.
+   - It can be more efficient when the graph is sparse (i.e., it has few edges compared to the number of vertices).
+   - It typically has a lower time complexity on sparse graphs, usually O(E log E), where E is the number of edges.
+
+In summary, the choice between Prim's and Kruskal's algorithm depends on the characteristics of the graph and the specific requirements of the problem:
+
+- Prim's algorithm is often preferred for dense graphs because of its lower time complexity in such cases.
+- Kruskal's algorithm is generally preferred for sparse graphs due to its efficient use of sorting and simpler data structures.
+
+Ultimately, the "better" algorithm depends on the context of the problem you are solving and the properties of the graph you are working with. It's important to analyze the characteristics of your specific problem and choose the algorithm that suits it best.
+
+*/
