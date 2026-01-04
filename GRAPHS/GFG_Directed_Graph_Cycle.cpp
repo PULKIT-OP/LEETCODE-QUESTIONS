@@ -11,9 +11,11 @@ class Solution {
         inRecursion[u] = true;
         
         for(auto &v : adj[u]){
+          // agar koi banda visited nahi hai to uspr dfs marke dekho, agar true aya to cycle hoga Ovsly
             if(!visited[v] && isCycleDFS(v, adj, visited, inRecursion)){
                 return true;
             }
+          // or agar visited hai to dfs marne ki zarurt kyu hai bas ye dekh lo ki inRecursion me hai ya nahi, agar hai to cycle hai 
             else if(visited[v] == true && inRecursion[v] == true){
                 return true;
             }
