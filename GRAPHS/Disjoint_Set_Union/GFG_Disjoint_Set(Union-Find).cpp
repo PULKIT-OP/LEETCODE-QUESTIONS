@@ -44,6 +44,7 @@ void unionSet(vector<int> &par, int x, int z, vector<int> &rank) {
         par[z_par] = x_par;
     }
     else{
+        par[x_par] = z_par;
         rank[z_par] += 1;
     }
 }
