@@ -124,3 +124,60 @@ public:
         return max(take_1, skip_1);
     }
 };
+
+
+// METHOD 4: CONSTANT SPACE
+// Here the main logic remains the same as bottom up, we are just optimizing space 
+// just look at the bottom up code, you will see in both the cases we have two variables take and skip, in those varialbes you wil see two more variables as dp[i-1] and dp[i-2].
+// If you look at these vairables and observe it carefully, its nothing but prev total vaule and prev of prev total values, with respect to your current node.
+// We just need to store these values in a variable and we dont need any array to store these 
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+
+        // handling corner case if we have only one house in array
+        if(n == 1){
+            return nums[0];
+        }
+
+    // CASE 1: If we SKIP first house
+        // storing prev_prev and prev value
+        // 
+        int prev_prev = 0;
+        int prev = 0;
+        int result_1 = 0;
+        // skipped first house menas we will start with second house
+        for(int i = 2; i <= n; i++){
+            
+            int take = nums[i-1] + prev_prev;
+            int skip = prev;
+            // storing final ans in result
+            result_1 = max(take, skip);
+            // updating prev_prev and prev
+            prev_prev = prev;
+            prev = result_1;
+        }
+
+    // CASE 2: If we TAKE first house
+        // resetting variables for next case
+        prev = 0;
+        prev_prev = 0;
+        int result_2 = 0;
+
+        // if we are taking first house so we will start from first house
+        for(int i = 1; i <= n-1; i++){
+            int take = nums[i-1] + prev_prev;
+            int skip = prev;
+
+            // storing fianl answer and updating variables
+            result_2 = max(take, skip);
+            prev_prev = prev;
+            prev = result_2;
+        }
+
+        // return maximum of both the final answers
+        return max(result_1, result_2);
+    }
+};
