@@ -91,9 +91,9 @@ public:
         vector<vector<long long>>dp (n+1, vector<long long>(2, 0));
       // start iteration from 1 to avoid error
         for(int i = 1; i <= n; i++){
-          // if current index make odd length then take i-1th index of dp and subtract current index, and if you are skipping current index then add i-1th value                in current index but with current lenght flag
+          // if current index make odd length then take i-1th index of dp and subtract current index, and if you are skipping current index then add i-1th value in current index but with current lenght flag
           // if current index make even length then take i-1th index of dp and add current index
-          // bhai is cheez pr jyada dhyaan dena ---> dobara se sun, agar current element milakar even length ho jaa raha hai it means current element ko lene               se pehle odd length raha hoga. isiliye take krne ke time pe i-1th ko reverse krke lete hain. and agar current element ko milaakr even length hua hai to            current element odd index pr hoga na. example dekh : 5, 6, 7, 8 ---> yaha pr 8 ko milakr dekhega to length toh even hai pr 8 ka index kya hai?? ODD                hai ---> and odd index ko subtract krna tha. AB SAMAJH AAYA???
+          // bhai is cheez pr jyada dhyaan dena ---> dobara se sun, agar current element milakar even length ho jaa raha hai it means current element ko lene se pehle odd length raha hoga. isiliye take krne ke time pe i-1th ko reverse krke lete hain. and agar current element ko milaakr even length hua hai to current element odd index pr hoga na. example dekh : 5, 6, 7, 8 ---> yaha pr 8 ko milakr dekhega to length toh even hai pr 8 ka index kya hai?? ODD hai ---> and odd index ko subtract krna tha. AB SAMAJH AAYA???
             dp[i][1] = max(dp[i-1][0] - nums[i-1], dp[i-1][1]);
             dp[i][0] = max(dp[i-1][1] + nums[i-1], dp[i-1][0]);
         }
