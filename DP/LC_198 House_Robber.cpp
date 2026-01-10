@@ -74,3 +74,41 @@ public:
         return dp[n];
     }
 };
+
+
+// METHOD 4: IN CONSTANT SPACE 
+// In this method we will use Bottom up Method as reference Just look at it, in FOR LOOP we have two varialbles skip and take in these variables we have dp[i-2] and dp[i-1] as other variable
+// If you just focus on theses dp vairables you will observe these are nothing but previous and previous of previous, of current value, for example if you are on ith house then these are nothing but total values till i-1th and i-2th house.
+// So instead of storing these in array you can keep two variables your space will get saved.
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+
+        // if nums has only one house then it will be the maximum 
+        if(n == 1){
+            return nums[0];
+        }
+
+    // storing previous house as we are starting from house numbder 2
+        int prev = nums[0];
+    // storing previous to previous house 
+        int prev_prev = 0;
+        // to store final result
+        int result = 0;
+        for(int i = 2; i <= n; i++){
+            // if you are skipping current house then your curr value will be equal to prev house 
+            int skip = prev;
+            // if you are taking current house then it means you must have skipped previous house it means you would have stolen prev to prev house so your curr value would be added to that
+            int take = nums[i-1] + prev_prev;
+            // now store maximum of both values in curr value
+            result = max(skip, take);
+            // now update prev and prev_prev
+            prev_prev = prev;
+            prev = result;
+        }
+    // return final answer
+        return result;
+    }
+};
