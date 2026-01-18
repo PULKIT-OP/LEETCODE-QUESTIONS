@@ -2,6 +2,7 @@
 
 
 // FLOYD WARSHALL Algorithm is used to get shortest path from all Vertices to all the Vertices in a Wieghted-Directed Graph.
+// MOST IMPORTANT ---> It is different from BELLMAN_FORD, as that algo cant compute shortest distance for all pairs of nodes but can only compute shortest distance form a source node to all other nodes.
 // It can detect -ve cycle as well
 // You just need to traverse through each edge in the graph via each node and if you find any better distance keep updating ---> This will be of O(n^3) complexity
 // To detect -ve cycle you just need to check each diagonal element if it has any value other than 0 after the above step.
