@@ -23,6 +23,10 @@ class Solution {
                 int w = e[2];
 
               // Relaxation : If distance to reach u is not infinity and distance to reach 'u' from source + 'w'(distance to reach v from u) is smaller than distace to reach v from source than update it
+              // Bhai in simple terms: result[u] ---> distace to reach u from source 
+              //                       w ----> distance to reach v from u 
+              //                       result[v] ----> distance to reach v from source 
+              // and we have to options to reach v either you go directly to node v from source or or or you first go to node u and then from there you go to node v both route will have their own distance you just have to use the shortest one
                 if(result[u] != 1e8 && result[u] + w < result[v]){
                     result[v] = result[u] + w;
                 }
