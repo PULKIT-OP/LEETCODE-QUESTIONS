@@ -1,6 +1,7 @@
 // Question Link: https://www.geeksforgeeks.org/problems/distance-from-the-source-bellman-ford-algorithm/1
 
-// Bellman-Ford is used to get the shortest path from then source to all the nodes or target node even if it has negative edge weight.
+// Bellman-Ford is used to get the shortest path from the source to all the nodes or target node even if it has negative edge weight.
+// MOST IMPORTANT ----> It is different from FLOYD WARSHALL, it cant get shortest distance for all pairs of nodes, but from a souce node to all other nodes.
 // It is also used to detect if any graph have negative cycle in it.
 // This Algorithm says you just have to relax the all the edges "V-1" times, and you will get your answer. And If you try to do relaxation more than V-1 times then no change in the answer will happen.
 // If any change happens after V-1 relaxations then -ve cycle is present in that graph.
