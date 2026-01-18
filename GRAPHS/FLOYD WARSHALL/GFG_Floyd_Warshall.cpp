@@ -7,16 +7,23 @@
 // You just need to traverse through each edge in the graph via each node and if you find any better distance keep updating ---> This will be of O(n^3) complexity
 // To detect -ve cycle you just need to check each diagonal element if it has any value other than 0 after the above step.
 
+
+// dist[i][j] ---> distance or weight of edges bw node i to node j.
+
 class Solution {
   public:
     void floydWarshall(vector<vector<int>> &dist) {
 
         int n = dist.size();
-        
+
+      // via all nodes from  0 to n nodes.
+      // we are visiting all nodes via all other nodes 
         for(int via = 0; via < n; via++){
             
             for(int i = 0; i < n; i++){
                 for(int j = 0; j < n; j++){
+                  // check if distance from node i to node j is greater than ----> distance from node i to node via plus node via to node j then update it 
+                  // Must check if distance from node i to via and via to j are valid and not infinity.
                     if(dist[i][j] > dist[i][via] + dist[via][j] && dist[i][via] < 1e8 && dist[via][j] < 1e8){
                         dist[i][j] = dist[i][via] + dist[via][j];
                     }
