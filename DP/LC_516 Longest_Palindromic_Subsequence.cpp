@@ -41,5 +41,36 @@ public:
 };
 
 
-// METHOD 2: 
+// METHOD 2: BOTTOM UP  --->  USING LPS BLUE-PRINT
 
+class Solution {
+public:
+    int longestPalindromeSubseq(string s) {
+        int n = s.length();
+
+        vector<vector<int>> dp(n, vector<int> (n));
+
+        // We know all the letters will have lenght 1 of subsequence of itself
+        for(int i = 0; i < n; i++){
+            dp[i][i] = 1;
+        }
+
+        // We stored length 1 of subsequence so, now we will start subsequence with length 2
+        for(int LEN = 2; LEN <= n; LEN++){
+            for(int i = 0; i+LEN-1 < n; i++){
+                int j = i+LEN-1;
+                // if ith and jth letters are same then the subsequence length will increase by 2 ----> because two new letters will be added
+                if(s[i] == s[j]){
+                    dp[i][j] = 2 + dp[i+1][j-1];
+                }
+                // Otherwise check for other possible options
+                else{
+                    dp[i][j] = max(dp[i+1][j], dp[i][j-1]);
+                }
+            }
+        }
+
+        // return the total subsequence which is asked ---> here 0 to n
+        return dp[0][n-1];
+    }
+};
