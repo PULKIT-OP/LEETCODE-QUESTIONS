@@ -15,7 +15,7 @@ public:
         for(int j = i; j < s.length(); j++){
           // if ith index to jth index is a palindrome
             if(dp[i][j] == true){
-              // Then push that substring in current elements array then look for more 
+              // Then push that substring in current elements array, then check from j+1th index
                 currPart.push_back(s.substr(i, j-i+1));
                 solve(s, j+1, dp, currPart, result);
               // After checking till last from this index remove the element you pushed in current array  ---->  This thing is also known as BACKTRACKING
