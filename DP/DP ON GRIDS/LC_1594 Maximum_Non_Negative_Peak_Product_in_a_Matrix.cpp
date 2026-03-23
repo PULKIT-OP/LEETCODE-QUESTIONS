@@ -1,6 +1,9 @@
 // Question Link: https://leetcode.com/problems/maximum-non-negative-product-in-a-matrix/description/
 
 // METHOD 1: RECURSION ---> TLE aaega LAADLE
+// each cell recieves 2 values(min and max) from right and 2 values(min and max) from down.
+// we are storing both min and max both values because we dont know whether we will get any negative or positive value in future so keep both values
+// and after getting all four values get the maximum and minimum values out of four and give it to next cell 
 
 class Solution {
 public:
@@ -8,7 +11,7 @@ public:
     int MOD = 1e9 + 7;
     typedef long long ll;
     pair<ll, ll> solve(vector<vector<int>> &grid, int i, int j){
-      // If you are on last cell then you can give only one value so return same value 
+      // If you are on last cell then you have only one value so for both min and max so return same value.
         if(i == m-1 && j == n-1){
             return {grid[i][j], grid[i][j]};
         }
