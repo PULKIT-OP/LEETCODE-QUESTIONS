@@ -96,3 +96,36 @@ public:
         return dp[0][0];
     }
 };
+
+
+// METHOD 3: BOTTOM UP SPACE OPTIMIZATION -> We just need previous values nothing else, so we just stored them and used it further then updated them
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+
+        int ahead_b = 0;
+        int ahead_nb = 0;
+
+        for(int i = n-1; i >= 0; i--){
+            int curr_b, curr_nb;
+            for(int bought = 0; bought < 2; bought++){
+                if(bought == 0){
+                    int buy = -prices[i] + ahead_nb;
+                    int nothing = 0 + ahead_b;
+                    curr_b = max(buy, nothing);
+                }
+                else{
+                    int sell = prices[i] + ahead_b;
+                    int nothing = 0 + ahead_nb;
+                    curr_nb = max(sell, nothing);
+                }
+            }
+            ahead_b = curr_b;
+            ahead_nb = curr_nb;
+        }
+
+        return ahead_b;
+    }
+};
