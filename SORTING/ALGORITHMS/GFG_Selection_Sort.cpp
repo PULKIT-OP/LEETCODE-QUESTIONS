@@ -1,6 +1,7 @@
 // Question Link: https://www.geeksforgeeks.org/problems/selection-sort/1
 
 // Selection Sort ----> SELECTION OF SMALLEST then swap with starting node then move forward
+// TC: O(N^2)
 class Solution {
 	public:
 	// Function to perform selection sort on the given array.
