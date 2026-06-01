@@ -1,6 +1,7 @@
 // Question Link: https://www.geeksforgeeks.org/problems/bubble-sort/1
 
 // Method 1: Find BB(Biggest Bubble) and push it to last
+// TC: O(N^2)
 class Solution {
   public:
     void bubbleSort(vector<int>& arr) {
