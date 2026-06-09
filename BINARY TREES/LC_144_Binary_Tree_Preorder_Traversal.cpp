@@ -4,19 +4,19 @@
 
 class Solution {
 public:
-    vector<int> in;
-    void Inorder(TreeNode *root){
+    vector<int> pre;
+    void PreOrder(TreeNode *root){
         if(root == NULL){
             return;
         }
 
-        in.push_back(root -> val);
-        Inorder(root -> left);
-        Inorder(root -> right);
+        pre.push_back(root -> val);
+        PreOrder(root -> left);
+        PreOrder(root -> right);
     }
     vector<int> preorderTraversal(TreeNode* root) {
-        Inorder(root);
+        PreOrder(root);
 
-        return in;
+        return pre;
     }
 };
