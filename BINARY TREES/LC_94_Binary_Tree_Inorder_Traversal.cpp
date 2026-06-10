@@ -1,6 +1,6 @@
 // Question Link: https://leetcode.com/problems/binary-tree-inorder-traversal/description/
 
-// METHOD 1: 
+// METHOD 1: Recursive Method 
 
 class Solution {
 public:
@@ -18,5 +18,39 @@ public:
         Inorder(root);
 
         return in;
+    }
+};
+
+
+// METHOD 2: Iterative Method with Stack
+
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> inOrder;
+        if(root == NULL){
+            return inOrder;
+        }
+
+        TreeNode *node = root;
+        stack<TreeNode*> st;
+
+        while(true){
+            if(node != NULL){
+                st.push(node);
+                node = node -> left;
+            }
+            else{
+                if(st.empty()){
+                    break;
+                }
+                node = st.top();
+                st.pop();
+                inOrder.push_back(node -> val);
+                node = node -> right;
+            }
+        }
+
+        return inOrder;
     }
 };
