@@ -47,4 +47,59 @@ public:
 };
 
 
-// FOLLOW UP WILL BE UPDATED SOON
+// FOLLOW UP METHOD
+// Altering the structure of BST for the solution 
+class Solution {
+public:
+
+    struct TreeNode {
+        int val;
+        TreeNode *left;
+        TreeNode *right;
+        int lCount; // count of nodes in left subtree
+
+        TreeNode(int x){
+            val = x;
+            left = right = NULL;
+            lCount = 0;
+        }
+    };
+
+    // maintain lCount while inserting nodes. Similar thiing needs to be done while deleting the nodes
+    TreeNode* insert(TreeNode* root, int x){
+        if(root == NULL){
+            return new TreeNode(x);
+        }
+        // if node is inserted in its left subtree then increment lCount of this node
+        if(x < root -> val){
+            root -> left = insert(root -> left, x);
+            root -> lCount++;
+        }
+        else if(x > root -> val){
+            root -> right = insert(root -> right, x);
+        }
+
+        return root;
+    }
+
+    // TreeNode* delet(TreeNode* root, int x){
+
+    // }
+
+    TreeNode* solve(TreeNode* root, int &k){
+        if(root == NULL){
+            return NULL;
+        }
+        int count = root -> lCount+1;
+        if(count == k){
+            return root;
+        }
+        if(count > k){
+            return solve(root -> left, k);
+        }
+        return solve(root -> right, k-count);
+    }
+    int kthSmallest(TreeNode* root, int k) {
+        return solve(root, k) -> val;
+    }
+};
