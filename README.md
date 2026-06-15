@@ -1,4 +1,4 @@
-````md
+
 # 🚀 DSA Solutions Repository
 
 A curated collection of **Data Structures & Algorithms** solutions from **LeetCode** and **GeeksforGeeks (GFG)**, organized topic-wise for efficient learning, revision, and interview preparation.
