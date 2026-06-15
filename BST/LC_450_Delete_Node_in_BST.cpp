@@ -68,3 +68,66 @@ public:
         return root;  // return root at last
     }
 };
+
+
+// METHOD 2: Deleting NODE and PRIORITIZING RIGHT PART
+// deleteNode function remaiins same just updated solve fucntion
+
+class Solution {
+public:
+    TreeNode* solve(TreeNode* root){
+        // if right doesnot exist then return left
+        if(root -> right == NULL){
+            return root -> left;
+        }
+        TreeNode* l = root -> left;    // if right exist then store root -> left in l poiniter for future
+        root -> left = NULL;    // now mark root -> left = NULL as we need to free root
+        TreeNode* temp = root;    // temp pointer to traverse in tree
+        temp = temp -> right;    // increment it to its right
+
+        // Now traverse in its right subtree to the left most node
+        while(temp -> left != NULL){
+            temp = temp -> left;
+        }
+
+        // Now attach l pointer to left of its left most node
+        temp -> left = l;
+
+        // Now return root -> right 
+        return root -> right;
+
+    }
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if(root == NULL){
+            return NULL;
+        }
+
+        if(root -> val == key){
+            return solve(root);
+        }
+        TreeNode* temp = root;
+
+        // Finding Node
+        while(temp != NULL){
+            if(temp -> val < key){
+                if(temp -> right != NULL && temp -> right -> val == key){
+                    temp -> right = solve(temp -> right);
+                    break;
+                }
+                else{
+                    temp = temp -> right;
+                }
+            }
+            else if(temp -> val > key){
+                if(temp -> left != NULL && temp -> left -> val == key){
+                    temp -> left = solve(temp -> left);
+                    break;
+                }
+                else{
+                    temp = temp -> left;
+                }
+            }
+        }
+        return root;
+    }
+};
