@@ -82,9 +82,52 @@ public:
         return root;
     }
 
-    // TreeNode* delet(TreeNode* root, int x){
-
-    // }
+    // Helper: find leftmost (smallest) node in a subtree
+    TreeNode* getInorderSuccessor(TreeNode* node){
+        while (node->left != NULL){
+            node = node->left;
+        }
+        return node;
+    }
+    
+    TreeNode* deleteNode(TreeNode* root, int x){
+        if (root == NULL) return NULL;
+    
+        if (x < root->val) {
+            root->left = deleteNode(root->left, x);
+            root->lCount--;  // ← a node was removed from left subtree
+        }
+        else if (x > root->val) {
+            root->right = deleteNode(root->right, x);
+            // lCount unchanged — deletion happened in right subtree
+        }
+        else {
+            //Found the node to delete
+            // Case 1 & 2: zero or one child
+            if (root->left == NULL) {
+                TreeNode* temp = root->right;
+                delete root;
+                return temp;
+            }
+            if (root->right == NULL) {
+                TreeNode* temp = root->left;
+                delete root;
+                return temp;
+            }
+    
+            // Case 3: two children
+            // Replace value with inorder successor (leftmost node in right subtree),
+            // then delete that successor from the right subtree.
+            TreeNode* successor = getInorderSuccessor(root->right);
+            root->val = successor->val;
+    
+            // Delete successor from right subtree; lCount of root stays the same
+            // because the deletion happens on the right side
+            root->right = deleteNode(root->right, successor->val);
+        }
+    
+        return root;
+    }
 
     TreeNode* solve(TreeNode* root, int &k){
         if(root == NULL){
