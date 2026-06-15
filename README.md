@@ -1,7 +1,7 @@
 
 # 🚀 DSA Solutions Repository
 
-A curated collection of **Data Structures & Algorithms** solutions from **LeetCode** and **GeeksforGeeks (GFG)**, organized topic-wise for efficient learning, revision, and interview preparation.
+A curated collection of **Data Structures & Algorithms** solutions from **LeetCode**, **GeeksforGeeks (GFG)** and some other platforms as well, organized topic-wise for efficient learning, revision, and interview preparation.
 
 This repository is designed not only to provide working solutions but also to help understand the **thought process**, **approach selection**, and **implementation details** behind each problem.
 
@@ -10,7 +10,7 @@ This repository is designed not only to provide working solutions but also to he
 ## 📚 Repository Features
 
 - 📂 **Topic-wise Organization** for easier navigation and revision.
-- 🧠 **Multiple Approaches** for many problems, ranging from brute-force to optimal solutions.
+- 🧠 **Multiple Approaches** for most of the problems, ranging from brute-force to optimal solutions.
 - 📝 **Detailed Comments** explaining the intuition and implementation at every important step.
 - 🔗 **Direct Problem Links** included inside each solution file.
 - 💡 **Interview-Oriented Solutions** focused on clarity, readability, and learning.
