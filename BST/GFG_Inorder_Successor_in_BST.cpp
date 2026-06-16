@@ -110,3 +110,67 @@ class Solution {
         return (ans == INT_MAX) ? -1 : ans;  // At last return answer accordingly
     }
 };
+
+
+// METHOD 4: If dont want to use recursive call stack space then There is a iterative approcah as well
+
+class Solution {
+  public:
+    int inOrderSuccessor(Node *root, Node *k) {
+        // code here
+        if(k == NULL || root == NULL){
+            return -1;
+        }
+        int ans = INT_MAX;
+        while(root){
+            if(root -> data > k -> data){
+                ans = min(ans, root -> data);
+                root = root -> left;
+            }
+            else{
+                root = root -> right;
+            }
+        }
+        
+        return (ans == INT_MAX) ? -1 : ans;
+        
+    }
+};
+
+
+// METHOD 5: More optimized approach of iterative method --> If there exist k -> right then its confirm our answer will be in right subtree of k 
+// Answer will be left most child of right subtree of k 
+
+class Solution {
+  public:
+    int inOrderSuccessor(Node *root, Node *k) {
+        // code here
+        if(k == NULL || root == NULL){
+            return -1;
+        }
+      
+      // Checking right subtree of k 
+        if(k -> right){
+            Node* temp = k -> right;
+            while(temp -> left){
+                temp = temp -> left;
+            }
+            
+            return temp -> data;
+        }
+      // now normal method
+        int ans = INT_MAX;
+        while(root){
+            if(root -> data > k -> data){
+                ans = root -> data;
+                root = root -> left;
+            }
+            else{
+                root = root -> right;
+            }
+        }
+        
+        return (ans == INT_MAX) ? -1 : ans;
+        
+    }
+};
