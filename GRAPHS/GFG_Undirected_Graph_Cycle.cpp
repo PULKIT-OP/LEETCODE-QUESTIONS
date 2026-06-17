@@ -93,3 +93,54 @@ class Solution {
         return false;
     }
 };
+
+
+// METHOD 3: USING BFS ---> Iterative 
+
+class Solution {
+  public:
+    bool detectBFS(vector<vector<int>> &adj, vector<bool> &visited, int u){
+        queue<pair<int, int>> q;
+        q.push({u, -1});
+        visited[u] = true;
+        
+        while(!q.empty()){
+            int node = q.front().first;
+            int parent = q.front().second;
+            q.pop();
+            
+            for(auto &it : adj[node]){
+                if(!visited[it]){
+                    visited[it] = true;
+                    q.push({it, node});
+                }
+                else if(it != parent && visited[it]){
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+    bool isCycle(int V, vector<vector<int>>& edges) {
+        int n = edges.size();
+        vector<vector<int>> adj(V);
+        
+        for(auto &e : edges){
+            int x = e[0];
+            int y = e[1];
+            
+            adj[x].push_back(y);
+            adj[y].push_back(x);
+        }
+        vector<bool> visited(V, false);
+        
+        for(int i = 0; i < V; i++){
+            if(!visited[i] && detectBFS(adj, visited, i)){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+};
