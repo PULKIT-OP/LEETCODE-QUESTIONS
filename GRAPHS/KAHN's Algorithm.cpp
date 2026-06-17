@@ -1,3 +1,6 @@
+// KAHN's Algorith is used to get the topologically sorted order of a graph with use of BFS method
+// topological sort with BFS is KAHN's ALGORITHM
+
 class Solution {
   public:
 
@@ -11,15 +14,13 @@ class Solution {
             adj[u].push_back(v);
         }
 
-      // populating initially indegree vector
-        
+      // populating initially indegree vector --> INdegree means number of nodes pointing towards the particular node --> that count is inDegree
         vector<int> indeg(V, 0);
         for(auto &v : edges){
             indeg[v[1]]++;
         }
         
         queue<int> que;
-        
         vector<int> ans;    // vector to store topological sorted array
 
       // checking if we have any node with 0 indegree if yes then push it in que and in ans vector
@@ -30,16 +31,15 @@ class Solution {
             }
         }
 
-      // now normal bfs code with little change
+        // now normal bfs code with little change
         while(!que.empty()){
             int node = que.front();
             que.pop();
 
-          // if we visit any node decrease its indegree
+            // if we visit any node decrease its indegree
             for(auto &v : adj[node]){
                 indeg[v]--;
-
-              // if indegree becomes zero then push it in que then in ans vector
+                // if indegree becomes zero then push it in que then in ans vector
                 if(indeg[v] == 0){
                     que.push(v);
                     ans.push_back(v);
