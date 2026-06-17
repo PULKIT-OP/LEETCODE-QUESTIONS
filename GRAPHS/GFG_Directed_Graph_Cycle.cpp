@@ -2,6 +2,9 @@
 
 
 // we will be solving it using two methods DFS and BFS, both methods are almost same one uses dfs algo and other uses bfs algo nothing much.
+// To understand this better take this example : 1 ----> 2 <---- 3
+// Here if you try the undirected graph cycle logic that will fail
+// First Recursion will cover 1 and 2, Second Recursion will cover 3 
 // METHOD 1: USING DFS
 class Solution {
   public:
