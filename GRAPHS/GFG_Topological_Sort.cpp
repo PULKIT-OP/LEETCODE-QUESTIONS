@@ -1,11 +1,15 @@
 // Question Link: https://www.geeksforgeeks.org/problems/topological-sort/1
 
+// Topological Sort: It means that type of sorting in which the node which comes first will be written first and so on.
+// for example --> if two nodes are connectec directly or indirectly(means you can reach to this node from previous node there exist a path) then these nodes will be written in that order only
+// Cannot explain more without diagrams 
+// TOPOLOGICAL SORT IS ONLY POSSIBLE IN DAG --> Directed Acyclic Graphs
 // METHOD 1: USING DFS
 class Solution {
   public:
   
     void DFS(int u, vector<vector<int>> &adj, vector<bool> &visited, stack<int> &st){
-        
+        // Normal DFS
         visited[u] = true;
         
         for(int &v : adj[u]){
@@ -13,10 +17,10 @@ class Solution {
                 DFS(v, adj, visited, st);
             }
         }
-        st.push(u);
+        st.push(u);  // Just push current node in stack after traversing all its neighbour --> so that it comes on top of stack and eventually will be first in sorting order
     }
     vector<int> topoSort(int V, vector<vector<int>>& edges) {
-        // code here
+        // Making Adj List
         vector<vector<int>> adj(V);
         for(auto &vec : edges){
             int u = vec[0];
@@ -25,15 +29,16 @@ class Solution {
             adj[u].push_back(v);
         }
         
-        vector<bool> visited(V, false);
+        vector<bool> visited(V, false);  // to mark visited
         stack<int> st;
-        
+        // Normal DFS Logic
         for(int i = 0; i < V; i++){
             if(!visited[i]){
                 DFS(i, adj, visited, st);
             }
         }
-        
+
+      // At last Just extract values from stack and put them in vector and return that
         vector<int> ans;
         while(!st.empty()){
             ans.push_back(st.top());
@@ -62,7 +67,6 @@ class Solution {
         }
 
       // populating initially indegree vector
-        
         vector<int> indeg(V, 0);
         for(auto &v : edges){
             indeg[v[1]]++;
