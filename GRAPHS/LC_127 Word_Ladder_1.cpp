@@ -15,27 +15,27 @@ public:
         return false;
     }
 
-    int BFS(string beginWord, string endWord){
+    int BFS(string beginWord, string endWord) {
         int count = 0;
 
-        while(!que.empty()){
+        while (!que.empty()) {
             int size = que.size();
 
-            for(int s = 0; s < size; s++){
+            for (int s = 0; s < size; s++) {
                 string u = que.front();
                 que.pop();
 
-                for(int m = 0; m < u.length(); m++){
-                    for(char i = 'a'; i <= 'z'; i++){
+                for (int m = 0; m < u.length(); m++) {
+                    for (char i = 'a'; i <= 'z'; i++) {
                         string test = u;
                         test[m] = i;
-                    if(visited.find(test) != visited.end()){
+                        if (visited.find(test) != visited.end()) {
                             continue;
-                        }
+                        } 
                         else{
-                            if(exist(test)){
-                                if(test == endWord){
-                                    return count+1;
+                            if (exist(test)) {
+                                if (test == endWord) {
+                                    return count + 1;
                                 }
                                 visited.insert(test);
                                 que.push(test);
@@ -198,7 +198,7 @@ public:
 };
 
 
-// after 3rd optimization ---> i checked the letter, if that is same than just continue no need to check for that
+// after 3rd optimization ---> i checked the letter, if that is same than just continue no need of further computation just jump to next letter
 
 class Solution {
 public:
@@ -261,3 +261,6 @@ public:
         return (ans == 0 ? 0 : ans + 1);
     }
 };
+
+
+// If you want more optimization just use unordered_map instead of set
