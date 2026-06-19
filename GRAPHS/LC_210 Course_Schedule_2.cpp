@@ -55,7 +55,7 @@ public:
 };
 
 
-// METHOD 2: USING BFS  ------> Cycle detection using inRecursion logic + topological sorting using stack logic ----> this complete package gives us the required result
+// METHOD 2: USING DFS  ------> Cycle detection using inRecursion logic + topological sorting using stack logic ----> this complete package gives us the required result
 
 
 class Solution {
@@ -111,5 +111,78 @@ public:
         }
       
         return result;
+    }
+};
+
+
+// METHOD 3: Its not Optimized much but To understand you can consider it ---> Im not clubbing everything here --> each function is separate --> checking cycle from separate function and getting topological sort from another function
+
+class Solution {
+public:
+    // getting topo sort
+    void TOPO(vector<vector<int>>& adj, vector<bool> &visited, stack<int> &st, int u){
+        visited[u] = true;
+
+        for(auto &e : adj[u]){
+            if(!visited[e]){
+                TOPO(adj, visited, st, e);
+            }
+        }
+
+        st.push(u);
+    }
+    // detectiing cycle
+    bool DFS_Cycle(vector<vector<int>>& adj, vector<bool> &visited, int u, vector<bool> &inRecur){
+        visited[u] = true;
+        inRecur[u] = true;
+
+        for(auto &e : adj[u]){
+            if(visited[e] && inRecur[e]){
+                return true;
+            }
+            if(!visited[e] && DFS_Cycle(adj, visited, e, inRecur)){
+                return true;
+            }
+        }
+        inRecur[u] = false;
+        return false;
+    }
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>> adj(numCourses);    // adj llist
+        for(auto &e : prerequisites){
+            int x = e[0];
+            int y = e[1];
+
+            adj[y].push_back(x);
+        }
+
+        vector<bool> visited(numCourses, false);
+        vector<bool> inRecur(numCourses, false);
+        bool cycle = false;
+        for(int i = 0; i < numCourses; i++){
+            if(!visited[i] && DFS_Cycle(adj, visited, i, inRecur)){
+                cycle = true;
+                break;
+            }
+        }
+
+        vector<int> result;
+        if(!cycle){
+            stack<int> st;
+            fill(visited.begin(), visited.end(), false);
+            for(int i = 0; i < numCourses; i++){
+                if(!visited[i]){
+                    TOPO(adj, visited, st, i);
+                }
+            }
+            while(!st.empty()){
+                result.push_back(st.top());
+                st.pop();
+            }
+
+            return result;
+        }
+
+        return {};
     }
 };
