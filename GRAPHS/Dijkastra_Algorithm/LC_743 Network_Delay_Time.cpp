@@ -38,15 +38,12 @@ public:
 
         int total_time = INT_MIN;
         for(int i = 1; i <= n; i++){
-            if(minTime[i] > total_time){
-                total_time = minTime[i];
+            if(mintTime[i] == INT_MAX){
+                return -1;
             }
+            total_time = max(minTime[i], total_time);
         }
 
-        if(total_time != INT_MAX){
-            return total_time;
-        }
-
-        return -1;
+        return total_time;
     }
 };
