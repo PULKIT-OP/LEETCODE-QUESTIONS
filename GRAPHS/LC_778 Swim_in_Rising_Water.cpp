@@ -1,6 +1,17 @@
 // Question Link: https://leetcode.com/problems/swim-in-rising-water/
 
 // METHOD 1: Using DFS + Binary Search
+// Logic behind this method is simple we will initially assume the highest possible time that we might take, and that is total no. of cell
+// then gradually decrease time using binary search if possible and reach to final answer.
+// basic template is of binary serach with while loop and mid, you will check if mid(time) is possible to reach bottom right from (0, 0)? 
+// If yes then your answer will be mid for now and now make your 'r' as 'mid - 1' for further calculations
+// If no then make your l as 'mid + 1' for further calculations
+// How we gonna check if its possible or not?
+// first check if your i and j are in bound and and and your cell at (i, j) is not exceeding the level of water which your current cell had and over that if your (i, j) is not already visited in this calculation
+// If you failed any case mentined above then this time(mid) is not possible find another time to reach (n, n)
+// If you passed all the cases first mark it viisted first
+// then check if its the last cell? if yes return true means you reached if no then
+// find its neighbour and check if thats possible -- > if yes then return yes otherwise return false
 
 class Solution {
 public:
@@ -63,5 +74,49 @@ public:
         }
         // at last return your final answer
         return result;
+    }
+};
+
+
+// METHOD 2: Using Dijkstra's Algo with little change
+
+class Solution {
+public:
+    int n;
+    bool visited[50][50];
+    typedef pair<int, pair<int, int>> p;
+    vector<vector<int>> directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    int swimInWater(vector<vector<int>>& grid) {
+        n = grid.size();
+
+        priority_queue<p, vector<p>, greater<p>> pq;
+        pq.push({grid[0][0], {0, 0}});
+        visited[0][0] = true;
+
+        auto isValid = [&](int x, int y){
+            return x >= 0 && x < n && y >= 0 && y < n;
+        };
+
+        while(!pq.empty()){
+            auto temp = pq.top();
+            int w = temp.first;
+            int i = temp.second.first;
+            int j = temp.second.second;
+            pq.pop();
+            if(i == n-1 && j == n-1){
+                return w;
+            }
+            for(int d = 0; d < 4; d++){
+                int x = i + directions[d][0];
+                int y = j + directions[d][1];
+                if(isValid(x, y) && !visited[x][y]){
+                    int new_w = grid[x][y];
+                    pq.push({max(w, new_w), {x, y}});
+                    visited[x][y] = true;
+                }
+            }   
+        }
+
+        return -1;
     }
 };
