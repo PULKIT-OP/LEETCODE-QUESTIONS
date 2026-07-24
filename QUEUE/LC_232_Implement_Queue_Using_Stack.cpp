@@ -45,3 +45,59 @@ public:
         return st.empty();
     }
 };
+
+// METHOD 2: Optimized --> decreased cost of push operation and increased cost of other operations
+
+class MyQueue {
+public:
+    stack<int> st;
+    stack<int> st2;
+    int size = 0;
+    MyQueue() {
+        
+    }
+    
+    void push(int x) {
+        st.push(x);
+    }
+    
+    int pop() {
+        if(!st2.empty()){
+            int ele = st2.top();
+            st2.pop();
+            return ele;
+        }
+        else{
+            while(!st.empty()){
+                st2.push(st.top());
+                st.pop();
+            }
+            int ele = st2.top();
+            st2.pop();
+            return ele;
+        }
+        return -1;
+    }
+    
+    int peek() {
+        if(!st2.empty()){
+            return st2.top();
+        }
+        else{
+            while(!st.empty()){
+                st2.push(st.top());
+                st.pop();
+            }
+            return st2.top();
+        }
+    }
+    
+    bool empty() {
+        if(st.empty() && st2.empty()){
+            return true;
+        }
+
+        return false;
+    }
+};
+
