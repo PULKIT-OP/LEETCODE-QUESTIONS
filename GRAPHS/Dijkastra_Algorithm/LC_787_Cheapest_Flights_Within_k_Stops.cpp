@@ -97,3 +97,29 @@ public:
         return -1;
     }
 };
+
+// METHOD 3: Using bellman ford algorithm
+
+class Solution {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        vector<int> result(n, 1e8);
+        result[src] = 0;
+
+        for(int i = 0; i <= k; i++){
+            vector<int> temp = result;
+            for(auto e : flights){
+                int u = e[0];
+                int v = e[1];
+                int p = e[2];
+
+                if(result[u] != 1e8 && result[u] + p < temp[v]){
+                    temp[v] = result[u] + p;
+                }
+            }
+            result = temp;
+        }
+
+        return result[dst] == 1e8 ? -1 : result[dst];
+    }
+};
