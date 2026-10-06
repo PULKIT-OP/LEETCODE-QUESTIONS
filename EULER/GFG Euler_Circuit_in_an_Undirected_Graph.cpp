@@ -1,5 +1,25 @@
 // Question Link: https://www.geeksforgeeks.org/problems/euler-circuit-in-a-directed-graph/1
 
+// LITTLE THEORY ABT EULER
+// EULARIAN PATH ---> A path in graph in which you use each edge only once
+// EULARIAN CIRCUIT ---> A graph in which from whereever you start you will end up at start node at last after visiting all edges only once
+// Not all graph will have EULARIAN CIRCUIT
+// If a graph is not EULARIAN CIRCUIT ---> Then either you will not be able to visit all edges or you cant come back to start node after visiting all edges at the end
+
+// For having EULER PATH all vertices with non zero degree MUST belong to a single connected component
+// All vertices have EVEN DEGREES if it has EULARIAN CIRCUIT
+// If a graph has EULER PATH and does not have EULER CIRCUIT then it is SEMI-EULARIAN GRAPH
+// If a graph has EULER CIRCUIT then it must be having EULER PATH and vice verca is NOT TRUE
+
+// In SEMI-EULARIAN GRAPH (which has only EULARIAN PATH no EULER CIRCUIT) will have odd degree at starting and ending node
+
+// HOW TO SPOT THAT IT IS A EULER GRAPH QUESTION?? ---> It will contain these keywords --> "use all only once", "visit all only once"
+
+// FOR DIRECTED GRAPH: 
+// Most of the things remains same, that it should visit all edges, start and end at same node and all that shii reamins same
+// Important part is this: here diffrence between inDegree and outDegree of start node is 1, and same goes for end node as well ---> It is for semi eularian graph
+// All other nodes will have indgree == outdegree ---> for semi eularian graph and eularian graph as well
+
 
 
 // METHOD 1: 
